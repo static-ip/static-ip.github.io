@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<title>Saving network in Windows Phone 8.1</title>
+	</head>
+	<body>
+		<h3>On Windows Phone 8.1 your network must be already saved if you want to connect to it with a static IP.</h3>
+		<h3>You need to do it only once. There are many possibilities to save your network:</h3>
+
+
+		<ul>
+			<li>
+				
+				<h3>Use wifi tethering on another phone.</h3>
+				This function is available on most Windows Phones, Androids and iPhones.
+				<ol>
+					<li>
+						Disable your router or get out of its range.
+					</li>
+					<li>
+						On the second phone, create network with the same name, password and encryption as desired network. 
+						<b>Please note that not all encryption settings are available on different devices.</b>
+					</li>
+					<li>
+						Connect to it.
+					</li>
+					<li>
+						Disable wifi tethering and enable your router.
+					</li>
+					<li>
+						Your network should be saved now and you may connect using static IP.
+					</li>
+				</ol>
+				<img src="android-tethering.png" height="400">
+				<img src="windows-tethering.png" height="400">
+			</li>
+
+
+
+			<li>
+				<h3>Start a DHCP server on a PC in your network for the time of first connection.</h3>
+				Instructions for Windows are below, Linux users will probably know how to do it on their computers.
+				<ol>
+					<li>Download <a href="http://tftpd32.jounin.net/download/tftpd32.450.zip">http://tftpd32.jounin.net/download/tftpd32.450.zip</a></li>
+					<li>Run tftpd32.exe from this zip.</li>
+					<li>Windows firewall may ask if you still want to block this program. Allow it to use Internet.</li>
+					<li>Press Settings.</li>
+					<li>Open DHCP tab.</li>
+					<li>Here you need to fill in some network parameters. 
+						<b>Please note they don't have to be correct, you only want your phone to save the network.</b>
+						Usually you can rewrite parameters from the screenshot.<img src="dhcp-settings.png"></li>
+					<li>Press OK.</li>
+
+					<li>Connect your phone to your network. Your network should be saved now.</li>
+				</ol>
+			</li>
+
+
+
+			<li>
+				<h3>Use internet sharing on your PC (only Windows 7, 8, 8.1 and networks with WPA/WPA2 PSK)</h3>
+				<ol>
+					<li>Disable your router or get out of its range.</li>
+
+					<li>Start cmd as Administrator.</li>
+
+					<li>Use two following commands to set network with the same name, password and encryption as the network you want to connect to. Replace network_name and password with your values:
+					<h4>netsh wlan set hostednetwork mode=allow ssid=network_name key=password</h4>
+					<h4>netsh wlan start hostednetwork</h4>
+					<img src="internet-sharing.png"></li>
+
+					<li>Connect to this network with your phone.</li>
+					<li>Stop this network issuing command:
+						<h4>netsh wlan stop hostednetwork</h4>
+					</li>
+
+					<li>Your network should be saved now and you may use static IP.</li>
+				</ol>
+			</li>
+		</ul>
+	</body>
+</html>
